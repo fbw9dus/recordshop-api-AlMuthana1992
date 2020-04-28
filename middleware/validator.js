@@ -1,19 +1,17 @@
-const { validationResult } = require("express-validator");
-const validateInputs = rules => {
-  return [
-    ...rules,
-    (req, res, next) => {
-      const errors = validationResult(req);
-      if (errors.isEmpty()) {
-        return next();
-      }
-      const extractedErrors = [];
-      errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }));
+const { validationResult } = require('express-validator')
 
-      return res.status(422).json({
-        errors: extractedErrors
-      });
-    }
-  ];
-};
-module.exports = { validateInputs };
+const validateInputs = rules => {
+    return [
+        ...rules,
+        (req, res, next) => {
+            const errors = validationResult(req)
+            if(!errors.isEmpty()){
+                return res.status(422).json({errors: errors.array()})
+            }
+            
+            next()
+        }
+    ]
+}
+
+module.exports = {validateInputs}
