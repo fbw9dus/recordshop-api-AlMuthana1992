@@ -25,6 +25,10 @@ const UserSchema = new Schema(
       required: true,
       select: false
     },
+    role :{
+      type:String,
+      required:true,
+    },
     address: AddressSchema,
     orders: [{
       ref: "Order",
