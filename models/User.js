@@ -28,6 +28,7 @@ const UserSchema = new Schema(
     role :{
       type:String,
       required:true,
+      enum:["Admin","User"]
     },
     address: AddressSchema,
     orders: [{

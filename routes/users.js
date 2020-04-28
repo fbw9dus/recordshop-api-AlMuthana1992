@@ -4,6 +4,7 @@ const router = express.Router();
 const auth = require('../middleware/authenticator')
 const {userValidationRules} = require('../lib/validation/userRules')
 const {validateInputs} = require('../middleware/validator')
+const isAdmin = require("../middleware/rolesAufenticator")
 const {
   getUsers,
   getUser,
@@ -15,7 +16,7 @@ const {
 
 router
   .route("/")
-  .get(auth, getUsers)
+  .get(auth,isAdmin, getUsers)
   .post(validateInputs(userValidationRules), addUser);
 
 router.route("/login")
