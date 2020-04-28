@@ -3,9 +3,7 @@ const request = require('supertest')
 const mongoose = require('mongoose')
 const User = require('../models/User')
 const faker = require('faker')
-
 let server;
-
 describe('Create Access Token', () => {
     test('New User should have token', async done => {
         const fakeUser = {
@@ -33,7 +31,6 @@ describe('Create Access Token', () => {
         )
         done()
     })
-
     test('Login should have token', async done => {
         const fakeUser = {
             firstName: faker.name.firstName(),
@@ -76,7 +73,3 @@ beforeAll(async (done) => {
     });
 });
   
-afterAll(async () => {
-    await server.close();
-    await mongoose.disconnect();
-});
