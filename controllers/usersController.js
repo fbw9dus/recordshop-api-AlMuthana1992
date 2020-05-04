@@ -43,6 +43,8 @@ exports.addUser = async (req, res, next) => {
       return res.status(422).json({ errors: errors.array() });
     }
     const user = req.body;
+    user.email = user.email.toLowerCase();
+
     // Schreib hier code um die Daten des neuen Kunden aus req.body in der users-Collection zu speichern
     await User.init()
     const newUser = new User(user)
@@ -51,20 +53,34 @@ exports.addUser = async (req, res, next) => {
   } catch (error) {
     next(error)
   }
-  
+
 };
 
 exports.loginUser = async (req, res, next) => {
   const { email, password } = req.body
-
   try {
-    const user = await User.findOne({ email }).select('+password')
-    const valid = encryption.compare(password, user.password)
+    const user = await User.findOne({
+      email: email.toLowerCase()
+    }).select('+password')
+
+    if ( ! user ) throw new createError.NotFound();
+
+    // important: the result of encryption.compare is a Promise
+    //   which is truthy, we need to await to get the real result
+    const valid = await encryption.compare(password, user.password)
+
+    if ( valid === false ) {
+      user.addFailedLoginAttempt();
+      await user.save()
+      throw new createError.NotFound();
+    }
+
+    // important: check if [valid] is exactly not true
+    //   in any other case: bail!
+    if ( valid !== true ) throw new createError.NotFound();
 
     const token = user.generateAuthToken()
     await user.save()
-    
-    if(!valid) throw new createError.NotFound()
 
     res
       .status(200)
@@ -72,7 +88,8 @@ exports.loginUser = async (req, res, next) => {
       .send(user)
 
   } catch (error) {
-    next(error)
+    console.error('login error',error);
+    next(new createError.NotFound())
   }
-  
+
 }

@@ -30,6 +30,10 @@ const UserSchema = new Schema(
       ref: "Order",
       type: mongoose.Types.ObjectId
     }],
+    failedLogins: [{
+      type:Date,default:Date.now
+    }],
+    group: [{type:String}],
     tokens: [
       {
         token: {
@@ -60,16 +64,20 @@ UserSchema.virtual("fullName").get(function() {
 UserSchema.pre("save", async function(next) {
   if(!this.isModified("password")) return next()
   this.password = await encryption.encrypt(this.password)
-  
+
   next()
 });
 
 UserSchema.pre("findOneAndUpdate", async function(next) {
   if(!this.getUpdate().password) return next()
   this._update.password = await encryption.encrypt(this._update.password)
-  
+
   next()
 });
+
+UserSchema.methods.addFailedLoginAttempt = function() {
+  this.failedLogins.push(Date.now());
+}
 
 UserSchema.methods.generateAuthToken = function() {
   const user = this
