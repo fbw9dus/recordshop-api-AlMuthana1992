@@ -2,6 +2,7 @@
 
 In dieser Datei stehen die Dinge, die bei jedem Schritt der App-Entwicklung programmiert werden müssen. Die Augraben werden in umgekehrter Reihenfolge aufgelistet, also die neuesten Aufgaben ganz oben und die, die schon erledigt sind, darunter.
 
+
 ## Aufgabe 08 - Authentifizierung
 
 Unsere App kann man schon gut benutzen aber sie ist bisher überhaupt nicht sicher. Jeder kann ein fremdes Nutzer-Konto löschen wenn er die ID kennt. Die Passwörter sind nicht verschlüsselt, so dass sie leicht in falsche Hände geraten können. Es wird nirgendwo geprüft, ob man eingeloggt ist.
@@ -34,6 +35,9 @@ Wir werden mit JSON Web Tokens eine Berechtigungsprüfung für jede Anfrage prog
 5. Schreib eine Middleware, die feststellt, ob ein Benutzer die Admin-Rolle hat.
 
 ## Aufgabe 07 - Verknüpfungen
+=======
+## Task 07 - Verknüpfungen
+
 
 MongoDB ist eine NoSQL-Datenbank, das heißt, es ist nicht-relational - unter anderem. Um Zusammenhänge zwischen Documents abzubilden, nutzen wir references mit IDs oder betten Sub-Dokumente direkt ein. In diesem Schritt, werden wir unseren Code anpassen um Verknüpfungen(relations) zwischen unseren Models herzustellen. Wie man sieht, hat eine Bestellung(Order) die ID einer Platte(record), aber wenn wir eine Bestellung aufrufen, sehen wir nur die ID aber keine Informationen über die Platte. Wir fügen eins-zu-eins- und eins-zu-mehrere-Verknüpfungen zu unseren Models hinzu und rufen die entsprechenden Daten ab, wenn nötig.
 
@@ -44,10 +48,13 @@ MongoDB ist eine NoSQL-Datenbank, das heißt, es ist nicht-relational - unter an
 1. Mach ein neues Schema `address` mit den Feldern `street` und `city`.
 2. Verbinde das `address`-Schema mit unserem `user`-Schema (1-to-1).
 3. Mit Hilfe von `refs`, verknüpfe das `record`-Schema mit dem `order`-Schema (1-to-many).
+<<<<<<< HEAD
 4. Unter `/orders` und `/orders/:id` soll Record der Bestellungen ohne `price` und `year` ausgegeben werden.
 5. Ändere die Users-Controller so, dass das Passwort nie in der Antwort(response) mitgesendet wird.
 6. Unter `/users` sollen maximal 5 Benutzer ausgegeben werden.
 7. Die Benutzer sollen nach `lastName` sortiert ausgegeben werden.
+=======
+>>>>>>> 7a5a83a36da98c3383e179d7b1d4a6038ad8cfd2
 
 ## Aufgabe 06 - Validation und Sanitization
 
