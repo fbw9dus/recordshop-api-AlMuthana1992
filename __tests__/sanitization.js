@@ -4,10 +4,8 @@ const mongoose = require('mongoose')
 const User = require('../models/User')
 const faker = require('faker')
 const validator = require('validator')
-
 let server;
 let token;
-
 describe('Sanitization', () => {
     test('email in db should be sanitized', async done => {
         ////// EMAIL
@@ -20,7 +18,6 @@ describe('Sanitization', () => {
             role: 'User'
         }
         const sanitizedEmail = validator.normalizeEmail(unsanitizedData.email)
-        
         const res = await request(app)
             .post(`/users`)
             .set('x-auth', `${token}`)
