@@ -24,6 +24,7 @@
     "morgan": "~1.9.1",
     "validator": "^13.0.0"
   },
+  
   "devDependencies": {
     "nodemon": "^1.19.2",
     "@babel/core": "*",
