@@ -31,5 +31,8 @@
     "babel-jest": "*",
     "jest": "*",
     "supertest": "^4.0.2"
-  }
+  },
+"eigines":{
+  "node":"12.x"
+}
 }
