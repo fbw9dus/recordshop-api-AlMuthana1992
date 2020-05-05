@@ -6,7 +6,7 @@ const devConfig = {
 }
 const prodConfig = {
     jwt_key: "d7s6fdsf8787dfafadaf",
-    db:"mongodb+srv://<username>:<password>@cluster0-9krc6.mongodb.net/test?retryWrites=true&w=majority"
+    db:"mongodb+srv://hassan:r6SnArAe6UI3t1t1@cluster0-9krc6.mongodb.net/test?retryWrites=true&w=majority"
 }
 
 

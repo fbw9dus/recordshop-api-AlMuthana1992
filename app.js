@@ -21,7 +21,7 @@ app.use(logger("dev"));
 console.log("Using db",env.db)
 
 /**CONNECT TO DB */
-mongoose.connect(env.db, {
+mongoose.connect(process.env.db, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true
